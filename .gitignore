@@ -1,0 +1,62 @@
+﻿# Visual Studio cache and settings
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+x64/
+x86/
+ARM/
+ARM64/
+bin/
+obj/
+Debug/
+Release/
+ipch/
+*.ilk
+*.pdb
+*.obj
+*.idb
+*.tlog
+*.log
+*.pch
+*.lib
+*.exp
+*.iobj
+*.ipdb
+*.rsp
+*.sdf
+*.opensdf
+*.VC.db
+
+# CMake build directories
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+build/
+
+# Editor files
+*.VC.db
+*.VC.opendb
+*.code-workspace
+
+# Generated files
+*.filters
+*.ncb
+*.aps
+*.sln
+*.vcxproj.user
+*.vcxproj.filters
+
+# Exclude external libraries
+libs/
+
+# Shader compilation outputs (optional)
+shaders/*.spv
+shaders/*.bin
+
+# Logs
+*.log
