@@ -1,6 +1,4 @@
-#include <src/Draw.h>
-#include <iterator>
-#include <algorithm>
+#include <Draw.h>
 
 Draw::Draw(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize, Shader& shader)
     : vao(), vbo(vertices, verticesSize * sizeof(float)), ebo(indices, indicesSize * sizeof(unsigned int)), shader(shader), indicesSize(indicesSize)

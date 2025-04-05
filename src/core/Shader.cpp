@@ -1,4 +1,4 @@
-#include <src/Shader.h>
+#include <Shader.h>
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     std::string vertexSource = loadShaderSource(vertexPath);

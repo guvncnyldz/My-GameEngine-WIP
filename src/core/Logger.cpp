@@ -1,7 +1,6 @@
-#include <src/Logger.h>
+#include <Logger.h>
+
 #include <iostream>
-#include <ctime>
-#include <iomanip>
 #include <sstream>
 
 Logger::Level Logger::currentLogLevel = Logger::Level::Custom;

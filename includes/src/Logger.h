@@ -32,15 +32,17 @@ public:
 		BrightCyan = 96,
 		//BrightWhite = 97
 	};
+
 	static void error(const char* msg, const char* file, int line, const char* function);
 	static void info(const char* msg, const char* file, int line, const char* function);
 	static void warning(const char* msg, const char* file, int line, const char* function);
 	static void log(const char* msg, const char* file, int line, const char* function, Color color = Color::White);
 	static void setLevel(Level level);
-private:
-	static void message(const char* msg, const char* file, int line, const char* function, Level level, int color);
 
+private:
 	static Level currentLogLevel;
+
+	static void message(const char* msg, const char* file, int line, const char* function, Level level, int color);
 
 	Logger() = delete;
 	~Logger() = delete;
