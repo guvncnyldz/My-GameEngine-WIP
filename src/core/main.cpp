@@ -6,6 +6,7 @@
 #include <src/Draw.h>
 #include <src/Shader.h>
 #include <src/Window.h>
+#include <src/Logger.h>
 
 float vertices[] = {
 	0.5f,  0.5f, 0.0f,

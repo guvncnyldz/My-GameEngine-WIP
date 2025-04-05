@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\Draw.cpp" />
     <ClCompile Include="src\core\EBO.cpp" />
+    <ClCompile Include="src\core\Logger.cpp" />
     <ClCompile Include="src\core\Shader.cpp" />
     <ClCompile Include="src\core\VAO.cpp" />
     <ClCompile Include="src\core\VBO.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="includes\src\Draw.h" />
     <ClInclude Include="includes\src\EBO.h" />
+    <ClInclude Include="includes\src\Logger.h" />
     <ClInclude Include="includes\src\Shader.h" />
     <ClInclude Include="includes\src\VAO.h" />
     <ClInclude Include="includes\src\VBO.h" />
