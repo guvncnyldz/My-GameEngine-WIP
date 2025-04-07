@@ -11,17 +11,43 @@ void Shader::use() const {
     glUseProgram(ID); 
 }
 
-void Shader::setBool(const std::string& name, bool value) const {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+void Shader::setBool(const char* name, bool value) const {
+    int location = getUniformLocation(name);
+    use();
+    glUniform1i(location, (int)value);
 }
 
-void Shader::setInt(const std::string& name, int value) const {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+void Shader::setInt(const char* name, int value) const {
+    int location = getUniformLocation(name);
+    use();
+    glUniform1i(location, value);
 }
 
-void Shader::setFloat(const std::string& name, float value) const {
-    glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+void Shader::setFloat(const char* name, float value) const {
+    int location = getUniformLocation(name);
+    use();
+    glUniform1f(location, value);
 }
+
+void Shader::setFloat4(const char* name, float v1, float v2, float v3, float v4) const {
+    int location = getUniformLocation(name);
+    use();
+    glUniform4f(location, v1,v2,v3,v4);
+}
+
+
+int Shader::getUniformLocation(const char* name) const
+{
+    int location = glGetUniformLocation(ID, name);
+
+    if (location == -1)
+    {
+        LOG_WARNING("Shader name can not find");
+    }
+
+    return location;
+}
+
 
 void Shader::compileAndLinkShaders(const char* vertexSource, const char* fragmentSource) {
     unsigned int vertexShader, fragmentShader;

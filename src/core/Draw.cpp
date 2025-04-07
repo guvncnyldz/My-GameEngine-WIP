@@ -20,9 +20,19 @@ void Draw::run() const
     vao.unbind();
 }
 
-void Draw::unbind()
+void Draw::unbind() const
 {
     vao.unbind();
     vbo.unbind();
     ebo.unbind();
+}
+
+void Draw::update(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize) const
+{
+    vbo.bind();
+    vbo.setData(vertices, verticesSize * sizeof(float));
+
+    ebo.bind();
+    ebo.setData(indices, indicesSize * sizeof(float));
+    unbind();
 }

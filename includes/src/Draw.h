@@ -6,19 +6,24 @@
 #include <src/EBO.h>
 #include <src/Shader.h>
 
+#include <pch.h>
+
 class Draw {
 public:
+	Shader& shader;
+
 	Draw(float* vertices, size_t verticesLength, unsigned int* indices, size_t indicesLength, Shader& shader);
 
 	void setVertexAttribPointer(unsigned int index, int size, GLenum type, GLboolean normalized, GLsizei stride, unsigned int pointer) const;
 	void run() const;
-	void unbind();
+	void unbind() const;
+	void update(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize) const;
+
 
 private:
 	VAO vao;
 	VBO vbo;
 	EBO ebo;
-	Shader& shader;
 	unsigned int indicesSize;
 };
 #endif 

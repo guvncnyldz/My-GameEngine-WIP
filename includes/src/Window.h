@@ -1,10 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include <iostream>
+#include <pch.h>
 
 class Window {
 public:
@@ -12,7 +9,7 @@ public:
     ~Window();
 
     int init();
-    void processInput();
+    void processInput(int GLFWKey, int GLFWState, std::function<void()> callback);
     void swapBuffers();
     void pollEvents();
     int shouldClose();
