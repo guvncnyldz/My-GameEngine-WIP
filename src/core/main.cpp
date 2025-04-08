@@ -14,11 +14,11 @@
 int CreateTexture(const int GLTexture, const int format, const char* location);
 
 float vertices[] = {
-
-	 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, 
-	 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, 
-	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,
-	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  
+	// positions          // colors           // texture coords
+	 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+	 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 };
 
 unsigned int indices[] = {
@@ -28,8 +28,10 @@ unsigned int indices[] = {
 
 int main()
 {
+	int height = 1920;
+	int width = 1080;
 	//These are just experiments. Renderers, game objects, classes, etc., will come soon.
-	Window window(800, 800, "My-GameEngine");
+	Window window(width, height, "My-GameEngine");
 
 	if (!window.init())
 		return -1;
@@ -71,12 +73,26 @@ int main()
 	glm::mat4 rotate2 = glm::mat4(1.0f);
 	glm::mat4 position2 = glm::mat4(1.0f);
 	glm::mat4 scale2 = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)height / (float)width, 0.1f, 100.0f);
 
 	while (!window.shouldClose())
 	{
 		window.pollEvents();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+
+		window.processInput(GLFW_KEY_T, GLFW_PRESS, [&view]() {
+			//zoom out
+			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.0f));
+			});
+		window.processInput(GLFW_KEY_G, GLFW_PRESS, [&view]() {
+			//zoom in
+			view = glm::translate(view, glm::vec3(0.0f, 0.0f, 1.0f));
+			});
 
 		window.processInput(GLFW_KEY_R, GLFW_PRESS, [&scale1]() {
 			//scale up
@@ -104,13 +120,29 @@ int main()
 			position1 = glm::translate(position1, glm::vec3(0.05f, 0, 0.0f));
 			});
 
-		window.processInput(GLFW_KEY_Q, GLFW_PRESS, [&rotate1]() {
-			//rotate left
+		window.processInput(GLFW_KEY_KP_7, GLFW_PRESS, [&rotate1]() {
+			//rotate counterclockwise
 			rotate1 = glm::rotate(rotate1, glm::radians(0.5f), glm::vec3(0.0f, 0, 1));
 			});
-		window.processInput(GLFW_KEY_E, GLFW_PRESS, [&rotate1]() {
-			//rotate right
+		window.processInput(GLFW_KEY_KP_9, GLFW_PRESS, [&rotate1]() {
+			//rotate clockwise
 			rotate1 = glm::rotate(rotate1, glm::radians(-0.5f), glm::vec3(0.0f, 0, 1));
+			});
+		window.processInput(GLFW_KEY_KP_4, GLFW_PRESS, [&rotate1]() {
+			//rotate left
+			rotate1 = glm::rotate(rotate1, glm::radians(0.5f), glm::vec3(0.0f, 1, 0));
+			});
+		window.processInput(GLFW_KEY_KP_6, GLFW_PRESS, [&rotate1]() {
+			//rotate right
+			rotate1 = glm::rotate(rotate1, glm::radians(-0.5f), glm::vec3(0.0f, 1, 0));
+			});
+		window.processInput(GLFW_KEY_KP_8, GLFW_PRESS, [&rotate1]() {
+			//rotate forward
+			rotate1 = glm::rotate(rotate1, glm::radians(0.5f), glm::vec3(1.0f, 0, 0));
+			});
+		window.processInput(GLFW_KEY_KP_2, GLFW_PRESS, [&rotate1]() {
+			//rotate backward
+			rotate1 = glm::rotate(rotate1, glm::radians(-0.5f), glm::vec3(1.0f, 0, 0));
 			});
 
 		///////////////////////////////
@@ -141,19 +173,37 @@ int main()
 			position2 = glm::translate(position2, glm::vec3(0.05f, 0, 0.0f));
 			});
 
-		window.processInputShift(GLFW_KEY_Q, GLFW_PRESS, [&rotate2]() {
-			//rotate left
+		window.processInputShift(GLFW_KEY_KP_7, GLFW_PRESS, [&rotate2]() {
+			//rotate counterclockwise
 			rotate2 = glm::rotate(rotate2, glm::radians(0.5f), glm::vec3(0.0f, 0, 1));
 			});
-		window.processInputShift(GLFW_KEY_E, GLFW_PRESS, [&rotate2]() {
-			//rotate right
+		window.processInputShift(GLFW_KEY_KP_9, GLFW_PRESS, [&rotate2]() {
+			//rotate clockwise
 			rotate2 = glm::rotate(rotate2, glm::radians(-0.5f), glm::vec3(0.0f, 0, 1));
+			});
+		window.processInputShift(GLFW_KEY_KP_4, GLFW_PRESS, [&rotate2]() {
+			//rotate left
+			rotate2 = glm::rotate(rotate2, glm::radians(0.5f), glm::vec3(0.0f, 1, 0));
+			});
+		window.processInputShift(GLFW_KEY_KP_6, GLFW_PRESS, [&rotate2]() {
+			//rotate right
+			rotate2 = glm::rotate(rotate2, glm::radians(-0.5f), glm::vec3(0.0f, 1, 0));
+			});
+		window.processInputShift(GLFW_KEY_KP_8, GLFW_PRESS, [&rotate2]() {
+			//rotate forward
+			rotate2 = glm::rotate(rotate2, glm::radians(0.5f), glm::vec3(1.0f, 0, 0));
+			});
+		window.processInputShift(GLFW_KEY_KP_2, GLFW_PRESS, [&rotate2]() {
+			//rotate backward
+			rotate2 = glm::rotate(rotate2, glm::radians(-0.5f), glm::vec3(1.0f, 0, 0));
 			});
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture3);
 		trans2 = position2 * rotate2 * scale2;
-		parentRenderer.shader.setMat4fv("transform", glm::value_ptr(trans2));
+		parentRenderer.shader.setMat4fv("model", glm::value_ptr(trans2));
+		parentRenderer.shader.setMat4fv("view", glm::value_ptr(view));
+		parentRenderer.shader.setMat4fv("projection", glm::value_ptr(proj));
 		parentRenderer.run();
 
 		glActiveTexture(GL_TEXTURE0);
@@ -162,8 +212,10 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
 		trans1 = position1 * rotate1 * scale1;
-		trans1 =  trans2 * trans1;
-		childRenderer.shader.setMat4fv("transform", glm::value_ptr(trans1));
+		//trans1 =  trans2 * trans1;
+		childRenderer.shader.setMat4fv("model", glm::value_ptr(trans1));
+		childRenderer.shader.setMat4fv("view", glm::value_ptr(view));
+		childRenderer.shader.setMat4fv("projection", glm::value_ptr(proj));
 		childRenderer.run();
 
 		window.swapBuffers();

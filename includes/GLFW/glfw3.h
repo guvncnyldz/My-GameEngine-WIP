@@ -404,6 +404,16 @@ extern "C" {
 #define GLFW_KEY_2                  50
 #define GLFW_KEY_3                  51
 #define GLFW_KEY_4                  52
+#define GLFW_KEY_KP_0               0x052
+#define GLFW_KEY_KP_1               0x04F
+#define GLFW_KEY_KP_2               0x050
+#define GLFW_KEY_KP_3               0x051
+#define GLFW_KEY_KP_4               0x04B
+#define GLFW_KEY_KP_5               0x04C
+#define GLFW_KEY_KP_6               0x04D
+#define GLFW_KEY_KP_7               0x047
+#define GLFW_KEY_KP_8               0x048
+#define GLFW_KEY_KP_9               0x049
 #define GLFW_KEY_5                  53
 #define GLFW_KEY_6                  54
 #define GLFW_KEY_7                  55
