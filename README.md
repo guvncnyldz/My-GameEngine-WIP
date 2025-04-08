@@ -7,6 +7,7 @@ Everything here is a recreation of what I’ve learned so far.
 - OpenGL  
 - GLAD  
 - GLFW  
+- GLM  
 
 ## ⚠️ Disclaimer  
 This is purely an educational project. Expect messy code and experiments!  
