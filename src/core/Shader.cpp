@@ -1,4 +1,4 @@
-#include <Shader.h>
+#include "Shader.h"
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     std::string vertexSource = loadShaderSource(vertexPath);
@@ -33,6 +33,13 @@ void Shader::setFloat4(const char* name, float v1, float v2, float v3, float v4)
     int location = getUniformLocation(name);
     use();
     glUniform4f(location, v1,v2,v3,v4);
+}
+
+void Shader::setMat4fv(const char* name, float* value) const
+{
+    int location = getUniformLocation(name);
+    use();
+    glUniformMatrix4fv(location, 1, GL_FALSE, value);
 }
 
 

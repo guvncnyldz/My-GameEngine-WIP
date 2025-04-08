@@ -44,7 +44,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glad;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\src;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\GLFW;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\KHR;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glad;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glm;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\GLFW;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\KHR;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Guven\Desktop\Projects\My-GameEngine\libs;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)bin\int\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
@@ -52,7 +52,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>$(SolutionDir)bin\int\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glad;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\src;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\GLFW;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\KHR;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glad;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\glm;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\GLFW;C:\Users\Guven\Desktop\Projects\My-GameEngine\includes\KHR;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Guven\Desktop\Projects\My-GameEngine\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -88,10 +88,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="includes\src\pch.cpp">
+    <ClCompile Include="src\core\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="includes\src\stb_image.cpp" />
+    <ClCompile Include="includes\stb_image.cpp" />
     <ClCompile Include="src\core\Draw.cpp" />
     <ClCompile Include="src\core\EBO.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
@@ -108,14 +108,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\stb_image.h" />
-    <ClInclude Include="includes\src\Draw.h" />
-    <ClInclude Include="includes\src\EBO.h" />
-    <ClInclude Include="includes\src\Logger.h" />
-    <ClInclude Include="includes\src\pch.h" />
-    <ClInclude Include="includes\src\Shader.h" />
-    <ClInclude Include="includes\src\VAO.h" />
-    <ClInclude Include="includes\src\VBO.h" />
-    <ClInclude Include="includes\src\Window.h" />
+    <ClInclude Include="src\core\Draw.h" />
+    <ClInclude Include="src\core\EBO.h" />
+    <ClInclude Include="src\core\Logger.h" />
+    <ClInclude Include="src\core\pch.h" />
+    <ClInclude Include="src\core\Shader.h" />
+    <ClInclude Include="src\core\VAO.h" />
+    <ClInclude Include="src\core\VBO.h" />
+    <ClInclude Include="src\core\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\awesomeface.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

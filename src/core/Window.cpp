@@ -1,4 +1,4 @@
-#include <Window.h>
+#include "Window.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -44,9 +44,16 @@ int Window::init() {
 
 void Window::processInput(int GLFWKey, int GLFWState, std::function<void()> callback) {
 
-	if (glfwGetKey(window, GLFWKey) == GLFWState)
+	if (glfwGetKey(window, GLFWKey) == GLFWState && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
 		callback();
 }
+
+void Window::processInputShift(int GLFWKey, int GLFWState, std::function<void()> callback) {
+
+	if (glfwGetKey(window, GLFWKey) == GLFWState && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		callback();
+}
+
 
 void Window::swapBuffers() {
 	glfwSwapBuffers(window);
