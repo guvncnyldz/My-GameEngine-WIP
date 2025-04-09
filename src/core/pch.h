@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <vector>
 
 #include <glad.h>
 #include <glfw3.h>

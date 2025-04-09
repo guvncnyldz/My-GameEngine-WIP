@@ -2,9 +2,9 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-
 Window::Window(int width, int height, const char* title)
-	: width(width), height(height), title(title), window(nullptr) {}
+	: width(width), height(height), title(title), window(nullptr) {
+}
 
 Window::~Window() {
 	if (window) {
@@ -12,6 +12,8 @@ Window::~Window() {
 	}
 	glfwTerminate();
 }
+
+
 
 int Window::init() {
 	if (!glfwInit()) {
@@ -39,7 +41,32 @@ int Window::init() {
 		return 0;
 	}
 
+	glfwSetWindowUserPointer(window, this);
+
 	return 1;
+}
+
+void Window::setInputMode(const int mode, const int value) const
+{
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void Window::subscribeMouse(std::function<void(double posX, double posY)> callback)
+{
+	mouseCallback = callback;
+}
+
+void Window::processMouse()
+{
+	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double posX, double posY)
+		{
+			Window* instance = static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+			if (instance && instance->mouseCallback)
+			{
+				instance->mouseCallback(posX, posY);
+			}
+		});
 }
 
 void Window::processInput(int GLFWKey, int GLFWState, std::function<void()> callback) {

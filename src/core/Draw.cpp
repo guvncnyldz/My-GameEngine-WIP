@@ -16,7 +16,8 @@ void Draw::run() const
     shader.use();
 
     vao.bind();
-    glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
     vao.unbind();
 }
 
