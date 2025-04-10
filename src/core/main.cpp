@@ -132,7 +132,6 @@ int main()
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-
 	while (!window.shouldClose())
 	{
 		window.pollEvents();
@@ -152,8 +151,7 @@ int main()
 		const float radius = 10.0f;
 		float camX = sin(glfwGetTime()) * radius;
 		float camZ = cos(glfwGetTime()) * radius;
-		glm::mat4 view;
-
+		glm::mat4 view = glm::mat4(1.0f);
 		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
 		window.subscribeMouse(mouse_callback);
@@ -234,12 +232,6 @@ void mouse_callback(double xposIn, double yposIn)
 
 	yaw += xoffset;
 	pitch += yoffset;
-
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
 }
 
 int CreateTexture(const int GLTexture, const int format, const char* location)
