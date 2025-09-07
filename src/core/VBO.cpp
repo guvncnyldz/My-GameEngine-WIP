@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "VBO.h"
 
 VBO::VBO(const float* vertices, size_t size) {

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Draw.h"
 
 Draw::Draw(float* vertices, size_t verticesSize, unsigned int* indices, size_t indicesSize, Shader& shader)

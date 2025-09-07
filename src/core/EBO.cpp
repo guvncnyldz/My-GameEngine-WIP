@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "EBO.h"
 
 EBO::EBO(const unsigned int* indices, size_t size) {

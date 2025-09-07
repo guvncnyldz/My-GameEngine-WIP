@@ -61,6 +61,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,8 +80,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h;pch.h;</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\Guven\Desktop\Projects\My-GameEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,10 +94,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="includes\stb_image.cpp" />
+    <ClCompile Include="includes\stb_image.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\core\Draw.cpp" />
     <ClCompile Include="src\core\EBO.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
@@ -99,7 +108,10 @@
     <ClCompile Include="src\core\VAO.cpp" />
     <ClCompile Include="src\core\VBO.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
-    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\glad.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\core\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -108,10 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\stb_image.h" />
+    <ClInclude Include="src\ECS\EntityPool.h" />
+    <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\core\Draw.h" />
     <ClInclude Include="src\core\EBO.h" />
     <ClInclude Include="src\core\Logger.h" />
-    <ClInclude Include="src\core\pch.h" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\core\Shader.h" />
     <ClInclude Include="src\core\VAO.h" />
     <ClInclude Include="src\core\VBO.h" />

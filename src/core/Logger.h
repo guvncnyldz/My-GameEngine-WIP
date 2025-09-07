@@ -33,16 +33,16 @@ public:
 		//BrightWhite = 97
 	};
 
-	static void error(const char* msg, const char* file, int line, const char* function);
-	static void info(const char* msg, const char* file, int line, const char* function);
-	static void warning(const char* msg, const char* file, int line, const char* function);
-	static void log(const char* msg, const char* file, int line, const char* function, Color color = Color::White);
+	static void error(std::string msg, std::string file, int line, std::string function);
+	static void info(std::string msg, std::string file, int line, std::string function);
+	static void warning(std::string msg, std::string file, int line, std::string function);
+	static void custom(std::string msg, std::string file, int line, std::string function, Color color = Color::White);
 	static void setLevel(Level level);
 
 private:
 	static Level currentLogLevel;
 
-	static void message(const char* msg, const char* file, int line, const char* function, Level level, int color);
+	static void message(std::string msg, std::string file, int line, std::string function, Level level, int color);
 
 	Logger() = delete;
 	~Logger() = delete;

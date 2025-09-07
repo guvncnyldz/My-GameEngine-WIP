@@ -1,9 +1,6 @@
-#include <glad.h>
-#include <glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "pch.h"
 
+#include "../ECS/EntityPool.h"
 #include "Draw.h"
 #include "Shader.h"
 #include "Window.h"
@@ -71,9 +68,48 @@ void mouse_callback(double xpos, double ypos);
 
 int main()
 {
+	//These are just experiments. Renderers, game objects, classes, etc., will come soon.
+
+	EntityPool<1024> entityPool;
+	Entity entity1 = entityPool.get();
+	Entity entity3 = entityPool.get();
+	Entity entity2 = entityPool.get();
+	Entity entity4 = entityPool.get();
+	Entity entity5 = entityPool.get();
+	Entity entity6 = entityPool.get();
+
+	entityPool.destroy(entity2);
+	entityPool.destroy(entity4);
+
+	Entity entity7 = entityPool.get();
+	Entity entity8 = entityPool.get();
+	Entity entity9 = entityPool.get();
+
+	entity7.log();
+	entity8.log();
+	entity9.log();
+
+	entityPool.destroy(entity9);
+
+	Entity entity10 = entityPool.get();
+
+	entity10.log();
+
+	entityPool.destroy(entity2);
+	entityPool.destroy(entity5);
+
+	Entity entity11 = entityPool.get();
+	Entity entity12 = entityPool.get();
+	Entity entity13 = entityPool.get();
+
+	entity11.log();
+	entity12.log();
+	entity13.log();
+
+	return -1;
+
 	int height = 1080;
 	int width = 1080;
-	//These are just experiments. Renderers, game objects, classes, etc., will come soon.
 
 
 	Window window(width, height, "My-GameEngine");
@@ -82,7 +118,7 @@ int main()
 		return -1;
 
 	glEnable(GL_DEPTH_TEST);
-	window.setInputMode(GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	window.setInputMode(GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	glfwSetScrollCallback(window.getWindow(), scroll_callback);
 
 	float deltaTime = 0.0f;
@@ -132,6 +168,8 @@ int main()
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+	float rollValue = 0;
+
 	while (!window.shouldClose())
 	{
 		window.pollEvents();
@@ -148,10 +186,8 @@ int main()
 			cameraSpeed = 2.5f * deltaTime;
 			});
 
-		const float radius = 10.0f;
-		float camX = sin(glfwGetTime()) * radius;
-		float camZ = cos(glfwGetTime()) * radius;
 		glm::mat4 view = glm::mat4(1.0f);
+
 		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
 		window.subscribeMouse(mouse_callback);
@@ -165,8 +201,14 @@ int main()
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		rollValue = 0;
 
-
+		window.processInput(GLFW_KEY_Q, GLFW_PRESS, [&rollValue, cameraSpeed,deltaTime]() {
+			rollValue += 10.0f * deltaTime;
+			});
+		window.processInput(GLFW_KEY_E, GLFW_PRESS, [&rollValue, cameraSpeed, deltaTime]() {
+			rollValue -= 10.0f * deltaTime;
+			});
 
 		window.processInput(GLFW_KEY_W, GLFW_PRESS, [&cameraPos, cameraSpeed, cameraFront]() {
 			cameraPos += cameraSpeed * cameraFront;
@@ -181,6 +223,9 @@ int main()
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 			});
 
+		glm::mat4 rollMat = glm::mat4(1.0f);
+		glm::mat4 rotate = glm::rotate(rollMat, glm::radians(rollValue), cameraFront);
+		cameraUp = glm::mat3(rotate) * cameraUp;
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);

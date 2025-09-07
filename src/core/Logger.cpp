@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "Logger.h"
-
 
 Logger::Level Logger::currentLogLevel = Logger::Level::Custom;
 
@@ -8,7 +8,7 @@ void Logger::setLevel(Level level)
 	currentLogLevel = level;
 }
 
-void Logger::error(const char* msg, const char* file, int line, const char* function)
+void Logger::error(std::string msg, std::string file, int line, std::string function)
 {
 	if (currentLogLevel > Level::Error)
 		return;
@@ -16,7 +16,7 @@ void Logger::error(const char* msg, const char* file, int line, const char* func
 	message(msg, file, line, function, Level::Error, 91);
 }
 
-void Logger::info(const char* msg, const char* file, int line, const char* function)
+void Logger::info(std::string msg, std::string file, int line, std::string function)
 {
 	if (currentLogLevel > Level::Info)
 		return;
@@ -24,7 +24,7 @@ void Logger::info(const char* msg, const char* file, int line, const char* funct
 	message(msg, file, line, function, Level::Info, 97);
 }
 
-void Logger::warning(const char* msg, const char* file, int line, const char* function)
+void Logger::warning(std::string msg, std::string file, int line, std::string function)
 {
 	if (currentLogLevel > Level::Warning)
 		return;
@@ -32,7 +32,7 @@ void Logger::warning(const char* msg, const char* file, int line, const char* fu
 	message(msg, file, line, function, Level::Warning, 93);
 }
 
-void Logger::log(const char* msg, const char* file, int line, const char* function, Color color)
+void Logger::custom(std::string msg, std::string file, int line, std::string function, Color color)
 {
 	if (currentLogLevel > Level::Custom)
 		return;
@@ -40,10 +40,9 @@ void Logger::log(const char* msg, const char* file, int line, const char* functi
 	message(msg, file, line, function, Level::Custom, (int)color);
 }
 
-void Logger::message(const char* msg, const char* file, int line, const char* function, Level level, int color)
+void Logger::message(std::string msg, std::string file, int line, std::string function, Level level, int color)
 {
 	std::string colorCode = "\033[" + std::to_string(color) + "m";
-
 	std::string levelStr;
 
 	switch (level) {
